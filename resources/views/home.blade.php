@@ -2,7 +2,7 @@
 
 @section('content')
 <!-- Hero Section / Home -->
-<section id="home" style="position: relative; text-align: center; padding: 12rem 2rem 10rem; overflow: hidden;">
+<section id="home" style="position: relative; text-align: center; padding: 10rem 1rem 6rem; overflow: hidden;">
     <!-- Background Elements -->
     <div style="position: absolute; top: -20%; left: 50%; transform: translateX(-50%); width: 600px; height: 600px; background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, rgba(0,0,0,0) 70%); filter: blur(80px); z-index: -1; animation: pulse 6s infinite;"></div>
     
@@ -10,11 +10,11 @@
         <div style="display: inline-block; padding: 0.5rem 1.5rem; background: rgba(139, 92, 246, 0.1); border-radius: 50px; border: 1px solid rgba(139, 92, 246, 0.2); backdrop-filter: blur(10px); margin-bottom: 2rem;">
             <span style="font-weight: 600; color: var(--primary); letter-spacing: 1px; text-transform: uppercase; font-size: 0.9rem;">✨ Since 2025</span>
         </div>
-        <h1 style="font-size: clamp(3rem, 8vw, 5rem); margin-bottom: 1.5rem; line-height: 1.1; font-weight: 800;">
+        <h1 style="font-size: clamp(2.5rem, 8vw, 5rem); margin-bottom: 1.5rem; line-height: 1.1; font-weight: 800;">
             Nikmati <span style="background: linear-gradient(120deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Kerenyahan</span><br>
             Yang <span style="background: linear-gradient(120deg, var(--secondary), var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Sungguhan</span>
         </h1>
-        <p style="font-size: 1.25rem; color: var(--text-muted); margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.8;">
+        <p style="font-size: clamp(1rem, 2vw, 1.25rem); color: var(--text-muted); margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.8;">
             Keripik Sohibah hadir dengan cita rasa otentik bumbu rahasia. Dibuat dengan cinta untuk menemani setiap momen santai Anda.
         </p>
         <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
@@ -25,23 +25,23 @@
 </section>
 
 <!-- Layanan Tambahan (Moved Up) -->
-<section class="container reveal" style="margin-top: -5rem; padding-top: 0;">
-    <div class="glass-panel" style="padding: 2rem; display: flex; justify-content: space-around; flex-wrap: wrap; gap: 2rem; align-items: center; border-radius: 24px; position: relative; z-index: 10;">
-        <div style="display: flex; align-items: center; gap: 1rem;">
+<section class="container reveal" style="margin-top: -3rem; padding-top: 0; padding-bottom: 2rem;">
+    <div class="glass-panel" style="padding: 2rem; display: flex; justify-content: center; flex-wrap: wrap; gap: 2rem; align-items: center; border-radius: 24px; position: relative; z-index: 10;">
+        <div style="display: flex; align-items: center; gap: 1rem; min-width: 250px;">
             <div style="width: 50px; height: 50px; background: rgba(139, 92, 246, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--primary);">🚀</div>
             <div>
                 <h4 style="margin:0;">Pengiriman Cepat</h4>
                 <small style="color: var(--text-muted);">Aman sampai tujuan</small>
             </div>
         </div>
-        <div style="display: flex; align-items: center; gap: 1rem;">
+        <div style="display: flex; align-items: center; gap: 1rem; min-width: 250px;">
             <div style="width: 50px; height: 50px; background: rgba(59, 130, 246, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--secondary);">💯</div>
             <div>
                 <h4 style="margin:0;">Rasa Premium</h4>
                 <small style="color: var(--text-muted);">Bumbu rempah asli</small>
             </div>
         </div>
-        <div style="display: flex; align-items: center; gap: 1rem;">
+        <div style="display: flex; align-items: center; gap: 1rem; min-width: 250px;">
             <div style="width: 50px; height: 50px; background: rgba(59, 130, 246, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--secondary);">🛡️</div>
             <div>
                 <h4 style="margin:0;">Halal & Higienis</h4>
@@ -52,15 +52,15 @@
 </section>
 
 <!-- Daftar Menu Section -->
-<section id="menu" class="container reveal" style="padding-top: 5rem;">
-    <div style="text-align: center; margin-bottom: 4rem;">
+<section id="menu" class="container reveal" style="padding-top: 3rem;">
+    <div style="text-align: center; margin-bottom: 3rem;">
         <span style="color: var(--secondary); font-weight: bold; letter-spacing: 1px;">OUR MENU</span>
         <h1 style="font-size: 2.5rem; margin-top: 0.5rem;">Pilihan Favorit</h1>
     </div>
     
     <div class="grid" id="productGrid">
         @foreach($products as $index => $product)
-            <div class="card glass-panel product-item {{ $index >= 3 ? 'hidden-product' : '' }}" style="{{ $index >= 3 ? 'display: none;' : '' }}; position: relative; overflow: visible;">
+            <div class="card glass-panel product-item {{ $index >= 4 ? 'hidden-product' : '' }}" style="{{ $index >= 4 ? 'display: none;' : '' }}; position: relative; overflow: visible;">
                 
                 @if($index === 0)
                     <div style="position: absolute; top: -10px; right: -10px; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 0.8rem; box-shadow: 0 4px 10px rgba(245, 158, 11, 0.4); z-index: 5;">
@@ -95,7 +95,7 @@
         @endforeach
     </div>
     
-    @if($products->count() > 3)
+    @if($products->count() > 4)
         <div style="text-align: center; margin-top: 3rem;">
             <button id="loadMoreBtn" onclick="toggleProducts()" class="btn" style="background: transparent; border: 1px solid rgba(255,255,255,0.2); color: white;">
                 Lihat Menu Lainnya ⬇
@@ -130,21 +130,21 @@
     <div style="margin-top: 5rem;" class="reveal">
          <h4 style="text-align: center; margin-bottom: 2rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Kebutuhan Lainnya</h4>
          <div style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;">
-            <div class="glass-panel" style="padding: 1.5rem 2rem; border-radius: 16px; display: flex; align-items: center; gap: 1rem; flex: 1; min-width: 250px; max-width: 350px;">
+            <div class="glass-panel" style="padding: 1.5rem 2rem; border-radius: 16px; display: flex; align-items: center; gap: 1rem; flex: 1; min-width: 280px; max-width: 350px;">
                 <div style="font-size: 2rem;">⚡</div>
                 <div>
                     <strong>Isi Pulsa & Data</strong>
                     <div style="font-size: 0.8rem; color: var(--text-muted);">All Operator 24 Jam</div>
                 </div>
             </div>
-            <div class="glass-panel" style="padding: 1.5rem 2rem; border-radius: 16px; display: flex; align-items: center; gap: 1rem; flex: 1; min-width: 250px; max-width: 350px;">
+            <div class="glass-panel" style="padding: 1.5rem 2rem; border-radius: 16px; display: flex; align-items: center; gap: 1rem; flex: 1; min-width: 280px; max-width: 350px;">
                 <div style="font-size: 2rem;">💧</div>
                 <div>
                     <strong>Galon Mineral</strong>
                     <div style="font-size: 0.8rem; color: var(--text-muted);">Layanan Antar Jemput</div>
                 </div>
             </div>
-            <div class="glass-panel" style="padding: 1.5rem 2rem; border-radius: 16px; display: flex; align-items: center; gap: 1rem; flex: 1; min-width: 250px; max-width: 350px;">
+            <div class="glass-panel" style="padding: 1.5rem 2rem; border-radius: 16px; display: flex; align-items: center; gap: 1rem; flex: 1; min-width: 280px; max-width: 350px;">
                 <div style="font-size: 2rem;">🔥</div>
                 <div>
                     <strong>Gas LPG</strong>
@@ -156,7 +156,7 @@
 </section>
 
 <!-- Testimoni Section -->
-<section id="testimonials" class="container reveal" style="padding-top: 5rem;">
+<section id="testimonials" class="container reveal" style="padding-top: 3rem;">
     <h1 style="text-align: center; margin-bottom: 1rem;">Kata Mereka</h1>
     <p style="text-align: center; color: var(--text-muted); margin-bottom: 3rem;">Pengalaman pelanggan setia Keripik Sohibah</p>
 
@@ -179,7 +179,7 @@
         <h3 style="text-align: center; margin-bottom: 1.5rem;">Bagikan Pengalaman Anda</h3>
         <form action="{{ route('testimonials.store') }}" method="POST">
             @csrf
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
                 <div>
                     <label>Nama</label>
                     <input type="text" name="customer_name" required placeholder="Nama Anda" style="width: 100%;">
@@ -205,7 +205,7 @@
 </section>
 
 <!-- Mitra Section -->
-<section id="mitra" class="container reveal" style="padding-top: 5rem;">
+<section id="mitra" class="container reveal" style="padding-top: 3rem;">
     <h1 style="text-align: center; margin-bottom: 1rem;">Lokasi Mitra</h1>
     <p style="text-align: center; color: var(--text-muted); margin-bottom: 3rem;">Jaringan distribusi kami</p>
 
@@ -234,17 +234,17 @@
 </section>
 
 <!-- Kontak Kami Section -->
-<section id="contact" class="container reveal" style="padding: 5rem 1.5rem;">
+<section id="contact" class="container reveal" style="padding: 4rem 1rem;">
     <!-- Section Header -->
     <div style="text-align: center; margin-bottom: 3rem;">
         <div style="display: inline-block; padding: 0.5rem 1.5rem; background: rgba(59, 130, 246, 0.1); border-radius: 50px; border: 1px solid rgba(59, 130, 246, 0.2); backdrop-filter: blur(10px); margin-bottom: 1rem;">
             <span style="font-weight: 600; color: var(--secondary); letter-spacing: 1px; text-transform: uppercase; font-size: 0.85rem;">💬 Hubungi Kami</span>
         </div>
-        <h1 style="font-size: clamp(2.5rem, 5vw, 3.5rem); margin-bottom: 0.75rem; background: linear-gradient(120deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Mari Terhubung</h1>
+        <h1 style="font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 0.75rem; background: linear-gradient(120deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Mari Terhubung</h1>
         <p style="color: var(--text-muted); font-size: 1.05rem; max-width: 600px; margin: 0 auto;">Kami siap mendengar masukan dan pertanyaan Anda</p>
     </div>
 
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 450px), 1fr)); gap: 2rem; max-width: 1100px; margin: 0 auto;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 1100px; margin: 0 auto;">
         <!-- Contact Form -->
         <div class="glass-panel" style="padding: 2rem; background: linear-gradient(145deg, rgba(30,41,59,0.8), rgba(15,23,42,0.9)); border: 1px solid rgba(139, 92, 246, 0.2); position: relative; overflow: hidden;">
             <!-- Decorative Background -->
