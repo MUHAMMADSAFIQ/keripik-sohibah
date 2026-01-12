@@ -1,4 +1,4 @@
-# Railway Configuration v2
+# Railway Configuration v3 (Robust Port)
 [phases.setup]
 nixPkgs = ["php82", "php82Extensions.pdo_mysql", "php82Extensions.bcmath", "nodejs_20"]
 
@@ -14,4 +14,4 @@ cmds = [
 ]
 
 [start]
-cmd = "php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=$PORT"
+cmd = "php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=8080"
