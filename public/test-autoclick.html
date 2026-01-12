@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Page - No Framework</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .card {
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        button {
+            background: #00AED5;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test Page - Deteksi Auto-Click</h1>
+    
+    <div class="card">
+        <h3>Test 1: Simple Button</h3>
+        <button onclick="alert('Button clicked!')">Klik Saya</button>
+        <p>Jika alert muncul sendiri tanpa diklik = ada masalah eksternal</p>
+    </div>
+
+    <div class="card">
+        <h3>Test 2: Link</h3>
+        <a href="#" onclick="alert('Link clicked!'); return false;">Klik Link Ini</a>
+        <p>Jika alert muncul sendiri = ada masalah eksternal</p>
+    </div>
+
+    <div class="card">
+        <h3>Test 3: Click Counter</h3>
+        <button id="counter">Click Count: 0</button>
+        <p id="log"></p>
+    </div>
+
+    <script>
+        let count = 0;
+        let log = [];
+        
+        document.getElementById('counter').addEventListener('click', function() {
+            count++;
+            this.textContent = 'Click Count: ' + count;
+            
+            const time = new Date().toLocaleTimeString();
+            log.push(time);
+            
+            document.getElementById('log').innerHTML = 
+                'Clicks: ' + log.join(', ') + 
+                '<br><strong>Jika counter naik sendiri = ada auto-clicker aktif!</strong>';
+        });
+
+        // Log page load
+        console.log('Test page loaded at:', new Date().toLocaleTimeString());
+        console.log('Jika ada click events tanpa interaksi user, check:');
+        console.log('1. Browser extensions (disable semua)');
+        console.log('2. Antivirus/Security software');
+        console.log('3. Mouse/Touchpad driver');
+        console.log('4. Malware/Virus');
+    </script>
+</body>
+</html>
