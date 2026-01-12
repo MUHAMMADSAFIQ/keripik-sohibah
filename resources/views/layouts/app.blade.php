@@ -13,80 +13,8 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
-<body>
+<body style="overflow-x: hidden;">
     <nav class="glass-panel">
-        <!-- Theme Toggle (Navbar - Left Side) -->
-        <div class="theme-switch-wrapper">
-           <label class="theme-switch" title="Ganti Tema">
-                <input type="checkbox" id="checkbox" onchange="toggleTheme()">
-                <div class="slider">
-                     <span class="icon-moon">🌙</span>
-                     <span class="icon-sun">☀️</span>
-                </div>
-           </label>
-        </div>
-
-        <!-- Auth Buttons -->
-        @auth
-            <div class="user-menu" style="margin-left: 15px; position: relative;">
-                <div class="user-profile" onclick="toggleUserMenu()" style="cursor: pointer; display: flex; align-items: center; gap: 8px; padding: 5px 10px; background: rgba(255,255,255,0.1); border-radius: 20px; border: 1px solid rgba(255,255,255,0.2);">
-                    @if(Auth::user()->avatar)
-                        <img src="{{ Auth::user()->avatar }}" alt="Profile" style="width: 30px; height: 30px; border-radius: 50%; object-fit: cover;">
-                    @else
-                        <div style="width: 30px; height: 30px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.9rem;">
-                            {{ substr(Auth::user()->name, 0, 1) }}
-                        </div>
-                    @endif
-                    <span class="user-name" style="font-size: 0.9rem; font-weight: 500; display: none; @media(min-width: 768px){display: block;}">{{ explode(' ', Auth::user()->name)[0] }}</span>
-                </div>
-                
-                <!-- Dropdown -->
-                <div id="userDropdown" style="position: absolute; top: 120%; left: 0; background: white; min-width: 150px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); padding: 5px; opacity: 0; transform: translateY(-10px); pointer-events: none; transition: all 0.2s; z-index: 1000;">
-                    <div style="padding: 8px 12px; border-bottom: 1px solid #eee;">
-                        <span style="display: block; font-size: 0.8rem; color: #888;">Halo,</span>
-                        <span style="display: block; font-weight: 600; color: #333;">{{ Auth::user()->name }}</span>
-                    </div>
-                    @if(Auth::user()->is_admin ?? false)
-                        <a href="{{ route('admin.dashboard') }}" style="display: block; padding: 8px 12px; color: #333; text-decoration: none; font-size: 0.9rem; border-radius: 6px; transition: background 0.1s;" onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='transparent'">Dashboard Admin</a>
-                    @endif
-                    <a href="{{ route('profile.edit') }}" style="display: block; padding: 8px 12px; color: #333; text-decoration: none; font-size: 0.9rem; border-radius: 6px; transition: background 0.1s;" onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='transparent'">Profil Saya</a>
-                    <form action="{{ route('logout') }}" method="POST" style="margin: 0;">
-                        @csrf
-                        <button type="submit" style="width: 100%; text-align: left; padding: 8px 12px; color: #ef4444; background: none; border: none; font-size: 0.9rem; cursor: pointer; border-radius: 6px; transition: background 0.1s;" onmouseover="this.style.background='#fef2f2'" onmouseout="this.style.background='transparent'">Keluar</button>
-                    </form>
-                </div>
-                
-                <script>
-                    function toggleUserMenu() {
-                        const dropdown = document.getElementById('userDropdown');
-                        if (dropdown.style.opacity === '0') {
-                            dropdown.style.opacity = '1';
-                            dropdown.style.transform = 'translateY(0)';
-                            dropdown.style.pointerEvents = 'auto';
-                        } else {
-                            dropdown.style.opacity = '0';
-                            dropdown.style.transform = 'translateY(-10px)';
-                            dropdown.style.pointerEvents = 'none';
-                        }
-                    }
-                    // Close on click outside
-                    document.addEventListener('click', function(e) {
-                         const profile = document.querySelector('.user-profile');
-                         const dropdown = document.getElementById('userDropdown');
-                         if (profile && dropdown && !profile.contains(e.target) && !dropdown.contains(e.target)) {
-                             dropdown.style.opacity = '0';
-                             dropdown.style.transform = 'translateY(-10px)';
-                             dropdown.style.pointerEvents = 'none';
-                         }
-                    });
-                </script>
-            </div>
-        @else
-            <a href="{{ route('login') }}" class="btn-login-nav" style="margin-left: 15px; text-decoration: none; padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: inherit; transition: all 0.3s; display: flex; align-items: center; gap: 5px;" onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">
-                <span>Login</span>
-            </a>
-        @endauth
-
         <a href="{{ route('home') }}" class="logo">Keripik Sohibah</a>
         
         <div class="mobile-menu-btn" onclick="toggleMenu()">
@@ -107,13 +35,27 @@
             </div>
 
             <ul>
-                <!-- Main Navigation -->
+                <!-- Theme Switcher (In Menu) -->
+                <li style="display: flex; align-items: center; justify-content: space-between; padding: 0 16px;">
+                    <span style="font-weight: 500;">Mode Gelap</span>
+                    <label class="theme-switch" title="Ganti Tema" style="margin: 0;">
+                        <input type="checkbox" id="checkbox" onchange="toggleTheme()">
+                        <div class="slider">
+                             <span class="icon-moon">🌙</span>
+                             <span class="icon-sun">☀️</span>
+                        </div>
+                    </label>
+                </li>
+                
+                <li class="mobile-only-divider" style="margin: 1rem 0; border-top: 1px solid rgba(255,255,255,0.1);"></li>
+
+                <!-- Main Navigation - NO Auto Close on Click as requested -->
                 @if(request()->routeIs('home'))
-                    <li><a href="#home" onclick="closeMenu()">Home</a></li>
-                    <li><a href="#menu" onclick="closeMenu()">Daftar Menu</a></li>
-                    <li><a href="#testimonials" onclick="closeMenu()">Testimoni</a></li>
-                    <li><a href="#mitra" onclick="closeMenu()">Mitra</a></li>
-                    <li><a href="#contact" onclick="closeMenu()">Kontak Kami</a></li>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#menu">Daftar Menu</a></li>
+                    <li><a href="#testimonials">Testimoni</a></li>
+                    <li><a href="#mitra">Mitra</a></li>
+                    <li><a href="#contact">Kontak Kami</a></li>
                 @else
                     <li><a href="{{ route('home') }}#home">Home</a></li>
                     <li><a href="{{ route('home') }}#menu">Daftar Menu</a></li>
@@ -122,7 +64,6 @@
                     <li><a href="{{ route('home') }}#contact">Kontak Kami</a></li>
                 @endif
                 
-                <!-- Account Navigation (Visible on Mobile) -->
                 <li class="mobile-only-divider" style="margin: 1rem 0; border-top: 1px solid rgba(255,255,255,0.1);"></li>
                 
                 <li><a href="{{ route('order.track') }}" onclick="closeMenu()" style="display: flex; align-items: center; gap: 10px;">
@@ -131,12 +72,19 @@
 
                 @auth
                      <li><a href="{{ route('profile.edit') }}" onclick="closeMenu()" style="display: flex; align-items: center; gap: 10px;">
-                        <span>👤 Profil Saya</span>
+                        <span>👤 Profil Saya ({{ explode(' ', Auth::user()->name)[0] }})</span>
                     </a></li>
+                    
+                    @if(Auth::user()->is_admin ?? false)
+                        <li><a href="{{ route('admin.dashboard') }}" onclick="closeMenu()" style="display: flex; align-items: center; gap: 10px; color: #f59e0b;">
+                            <span>🛡️ Admin Dashboard</span>
+                        </a></li>
+                    @endif
+
                     <li>
                         <form action="{{ route('logout') }}" method="POST" style="width: 100%;">
                             @csrf
-                            <button type="submit" style="background: none; border: none; color: #ef4444; font-size: inherit; font-weight: inherit; padding: 0; cursor: pointer; display: flex; align-items: center; gap: 10px; font-family: inherit;">
+                            <button type="submit" style="background: none; border: none; color: #ef4444; font-size: inherit; font-weight: inherit; padding: 0; cursor: pointer; display: flex; align-items: center; gap: 10px; font-family: inherit; width: 100%; text-align: left;">
                                 <span>🚪 Keluar</span>
                             </button>
                         </form>

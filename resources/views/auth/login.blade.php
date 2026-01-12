@@ -126,15 +126,7 @@
                 MASUK SEKARANG
             </button>
 
-            <div class="or-divider" style="position: relative; text-align: center; margin: 2rem 0;">
-                <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1);">
-                <span style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); padding: 0 1rem; font-size: 0.9rem; border-radius: 10px;">atau</span>
-            </div>
-
-            <a href="{{ route('google.login') }}" style="display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; padding: 1rem; border-radius: 50px; background: white; text-decoration: none; color: #1e293b; font-weight: 600; transition: all 0.3s;">
-                <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" width="24" height="24">
-                Lanjutkan dengan Google
-            </a>
+            <!-- Divider and Google Login Removed as per request -->
 
             <div style="text-align: center; color: #94a3b8 !important; font-size: 0.95rem; margin-top: 2rem;">
                 Belum punya akun? <a href="{{ route('register') }}" style="color: #4ade80 !important; text-decoration: none; font-weight: 700;">Daftar disini</a>
