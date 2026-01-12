@@ -96,25 +96,59 @@
         </div>
 
         <div class="nav-container" id="navMenu">
+            <!-- Sidebar Header for Mobile -->
+            <div class="mobile-nav-header">
+                <div>
+                    <span style="font-weight: 800; font-size: 1.25rem; background: linear-gradient(120deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Menu</span>
+                </div>
+                <button class="close-menu-btn" onclick="closeMenu()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+
             <ul>
-                <!-- Check if current route is home, otherwise redirect to home/#anchor -->
+                <!-- Main Navigation -->
                 @if(request()->routeIs('home'))
                     <li><a href="#home" onclick="closeMenu()">Home</a></li>
                     <li><a href="#menu" onclick="closeMenu()">Daftar Menu</a></li>
                     <li><a href="#testimonials" onclick="closeMenu()">Testimoni</a></li>
                     <li><a href="#mitra" onclick="closeMenu()">Mitra</a></li>
                     <li><a href="#contact" onclick="closeMenu()">Kontak Kami</a></li>
-                    <li><a href="{{ route('order.track') }}" onclick="closeMenu()" style="color: var(--secondary);">Cek Status</a></li>
                 @else
                     <li><a href="{{ route('home') }}#home">Home</a></li>
                     <li><a href="{{ route('home') }}#menu">Daftar Menu</a></li>
                     <li><a href="{{ route('home') }}#testimonials">Testimoni</a></li>
                     <li><a href="{{ route('home') }}#mitra">Mitra</a></li>
                     <li><a href="{{ route('home') }}#contact">Kontak Kami</a></li>
-                    <li><a href="{{ route('order.track') }}" style="color: var(--secondary);">Cek Status</a></li>
                 @endif
+                
+                <!-- Account Navigation (Visible on Mobile) -->
+                <li class="mobile-only-divider" style="margin: 1rem 0; border-top: 1px solid rgba(255,255,255,0.1);"></li>
+                
+                <li><a href="{{ route('order.track') }}" onclick="closeMenu()" style="display: flex; align-items: center; gap: 10px;">
+                    <span>📦 Cek Pesanan</span>
+                </a></li>
+
+                @auth
+                     <li><a href="{{ route('profile.edit') }}" onclick="closeMenu()" style="display: flex; align-items: center; gap: 10px;">
+                        <span>👤 Profil Saya</span>
+                    </a></li>
+                    <li>
+                        <form action="{{ route('logout') }}" method="POST" style="width: 100%;">
+                            @csrf
+                            <button type="submit" style="background: none; border: none; color: #ef4444; font-size: inherit; font-weight: inherit; padding: 0; cursor: pointer; display: flex; align-items: center; gap: 10px; font-family: inherit;">
+                                <span>🚪 Keluar</span>
+                            </button>
+                        </form>
+                    </li>
+                @else
+                    <li><a href="{{ route('login') }}" onclick="closeMenu()" style="display: flex; align-items: center; gap: 10px; color: var(--primary);">
+                        <span>🔑 Login / Daftar</span>
+                    </a></li>
+                @endauth
             </ul>
-            <a href="{{ route('order.create') }}" class="btn nav-cta">Pesan Sekarang</a>
+            
+            <a href="{{ route('order.create') }}" class="btn nav-cta" style="margin-top: 1.5rem;">Pesan Sekarang</a>
         </div>
     </nav>
     
@@ -797,41 +831,7 @@
     </script>
     
     <!-- Mobile Bottom Navigation -->
-    <div class="bottom-nav">
-        <a href="{{ route('home') }}" class="bottom-nav-item {{ request()->routeIs('home') ? 'active' : '' }}">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-            </svg>
-            <span>Home</span>
-        </a>
-        <a href="{{ route('home') }}#menu" class="bottom-nav-item">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-            </svg>
-            <span>Menu</span>
-        </a>
-        <a href="{{ route('order.track') }}" class="bottom-nav-item {{ request()->routeIs('order.track') ? 'active' : '' }}">
-             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-            </svg>
-            <span>Pesanan</span>
-        </a>
-        @auth
-            <a href="{{ route('profile.edit') }}" class="bottom-nav-item {{ request()->routeIs('profile.edit') ? 'active' : '' }}">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                </svg>
-                <span>Profil</span>
-            </a>
-        @else
-            <a href="{{ route('login') }}" class="bottom-nav-item {{ request()->routeIs('login') ? 'active' : '' }}">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
-                </svg>
-                <span>Login</span>
-            </a>
-        @endauth
-    </div>
+    <!-- Mobile Bottom Navigation REMOVED as per user request -->
 
     <!-- Advanced Animations & Interactions - DISABLED to fix auto-click issue -->
     <!-- <script src="{{ asset('js/animations.js') }}"></script> -->
