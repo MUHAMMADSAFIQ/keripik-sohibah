@@ -1821,63 +1821,57 @@ nav ul {
         }
     }
 
-    /* MOBILE RESPONSIVE CHAT */
+    /* MOBILE RESPONSIVE CHAT & GENERAL POSITIONING */
+    /* Force Bottom-Left Grid for Chat */
+    .chat-widget {
+        right: auto !important;
+        left: 20px !important;
+        bottom: 20px !important;
+        border-radius: 20px !important;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2) !important;
+    }
+
+    .chat-toggle {
+        right: auto !important;
+        left: 20px !important;
+        bottom: 20px !important;
+    }
+
+    /* Premium Gradient Header */
+    .chat-header {
+        background: linear-gradient(135deg, var(--primary), var(--secondary)) !important;
+    }
+
+    /* Clean Body Background */
+    .chat-body {
+        background: var(--glass) !important;
+        background-image: none !important;
+    }
+
     @media screen and (max-width: 480px) {
-        .chat-widget {
-            width: 100% !important;
-            height: 100% !important;
-            bottom: 0 !important;
-            right: 0 !important;
-            border-radius: 0 !important;
-            z-index: 10000 !important;
+        .chat-widget.open {
+            width: 90% !important;
+            /* Not full width to keep it floating */
+            max-width: 350px;
+            height: 500px !important;
+            bottom: 80px !important;
+            /* Above toggle */
+            left: 20px !important;
+            border-radius: 20px !important;
         }
 
-        .chat-header {
-            border-radius: 0 !important;
-            padding: 1rem !important;
-            padding-top: 1.5rem !important;
+        /* Sidebar Overlay - No Blur */
+        .overlay {
+            backdrop-filter: none !important;
+            background: rgba(0, 0, 0, 0.5) !important;
         }
 
-        .chat-toggle {
-            bottom: 20px !important;
-            right: 20px !important;
-            width: 55px !important;
-            height: 55px !important;
-            font-size: 24px !important;
+        /* Ensure Navbar is clickable */
+        .nav-container {
+            z-index: 99999;
         }
 
-        .chat-body {
-            padding: 1rem !important;
-        }
-
-        .message {
-            font-size: 0.9rem !important;
-        }
-
-        #quickReplies {
-            padding: 10px 1rem !important;
-            overflow-x: auto;
-            white-space: nowrap;
-            flex-wrap: nowrap !important;
-            justify-content: flex-start;
-        }
-
-        .quick-reply-btn {
-            flex: 0 0 auto;
-            font-size: 0.8rem !important;
-            padding: 6px 14px !important;
-        }
-
-        .chat-footer {
-            padding: 10px 1rem !important;
-            padding-bottom: 20px !important;
-            /* Safe area for some phones */
-        }
-
-        .chat-footer input {
-            font-size: 16px !important;
-            /* Prevent zoom on iOS */
-        }
+        /* Make overlay z-index lower than nav if needed, but nav mobile is complex. */
     }
 
     /* Theme Toggle Switch (Gopay Style) */
