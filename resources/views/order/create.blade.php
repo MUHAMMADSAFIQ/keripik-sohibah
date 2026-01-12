@@ -17,7 +17,7 @@
         <p style="color: var(--text-muted); font-size: 1rem; max-width: 600px; margin: 0 auto;">Isi data diri dan pilih menu favorit Anda dengan mudah</p>
     </div>
     
-    <div class="glass-panel reveal" style="padding: 2.5rem; max-width: 1000px; margin: 0 auto; position: relative; z-index: 1; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.1);">
+    <div class="glass-panel glass-panel-order reveal" style="max-width: 1000px; margin: 0 auto; position: relative; z-index: 1; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.1);">
         <style>
             @keyframes float {
                 0%, 100% { transform: translateY(0px); }
@@ -28,7 +28,7 @@
         <form action="{{ route('order.store') }}" method="POST" id="orderForm" style="position: relative; z-index: 2;" enctype="multipart/form-data">
             @csrf
             
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start;">
+            <div class="order-main-grid">
                  <!-- Left Column: Personal Data -->
                  <div>
                     <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 1.5rem;">
@@ -56,7 +56,7 @@
                         <input type="hidden" name="shipping_cost" id="shippingCostInput" value="0">
                         <input type="hidden" name="shipping_service" id="shippingServiceInput">
                         
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div class="address-grid">
                             <div>
                                 <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Provinsi</label>
                                 <select id="provinceSelect" onchange="loadCities(this.value)" style="width: 100%;">
@@ -485,8 +485,63 @@
                     100% { left: 200%; }
                 }
                 
+                /* Default Desktop Styles */
+                .order-main-grid {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 2.5rem;
+                    align-items: start;
+                }
+                
+                .address-grid {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 15px;
+                }
+
+                .glass-panel-order {
+                    padding: 2.5rem;
+                }
+                
+                .item-row {
+                    display: flex;
+                    gap: 12px;
+                    margin-bottom: 12px;
+                    align-items: center;
+                }
+
+                /* Mobile Styles */
                 @media (max-width: 768px) {
-                    form > div { grid-template-columns: 1fr !important; gap: 2rem !important; }
+                    .order-main-grid {
+                        grid-template-columns: 1fr;
+                        gap: 2rem;
+                    }
+                    
+                    .glass-panel-order {
+                        padding: 1.5rem !important; /* Reduced padding */
+                    }
+
+                    .address-grid {
+                        grid-template-columns: 1fr; /* Stack Province & City */
+                    }
+                    
+                    /* Tweak item row for very small screens */
+                    .item-row {
+                        flex-wrap: wrap;
+                    }
+                    
+                    .item-row select {
+                        width: 100% !important;
+                        flex: 100% !important;
+                    }
+                    
+                    .item-row input[type="number"] {
+                        flex: 1;
+                    }
+                    
+                    .item-row button {
+                        /* Keep delete button size */
+                    }
                 }
                 
                 .delivery-radio:checked + .delivery-card {
