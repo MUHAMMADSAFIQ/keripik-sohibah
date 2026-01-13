@@ -701,10 +701,11 @@ footer p {
 /* Chat Widget */
 .chat-widget {
     position: fixed;
-    bottom: 110px;
+    bottom: 90px;
     right: 30px;
-    width: 400px;
-    height: 520px;
+    width: 380px;
+    height: 450px;
+    max-height: 80vh;
     display: flex;
     flex-direction: column;
     z-index: 9999;
@@ -730,9 +731,10 @@ footer p {
         width: 90%;
         right: 5%;
         left: 5%;
-        bottom: 100px;
+        bottom: 90px;
         /* Above bottom nav/toggle */
-        height: 60vh;
+        height: 50vh;
+        max-height: 500px;
     }
 }
 
