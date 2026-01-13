@@ -231,9 +231,12 @@ nav ul {
 .mobile-menu-btn .bar {
     width: 28px;
     height: 3px;
-    background-color: var(--text-main);
+    background-color: white;
+    /* Force white for visibility */
     border-radius: 99px;
     transition: all 0.3s ease;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    /* Add shadow for contrast */
 }
 
 /* Tablet & Mobile Responsive */
