@@ -68,7 +68,7 @@
                     </div>
                 @endif
 
-                <div style="position: relative; overflow: hidden; border-radius: 16px; margin-bottom: 1.5rem; height: 220px; background: rgba(0,0,0,0.05);">
+                <div class="product-img-box" style="position: relative; overflow: hidden; border-radius: 16px; margin-bottom: 1.5rem; height: 220px; background: rgba(0,0,0,0.05);">
                     <img src="{{ Str::startsWith($product->image, 'http') ? $product->image : route('product.image', basename($product->image)) }}" 
                          alt="{{ $product->name }}" 
                          style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;"

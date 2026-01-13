@@ -37,7 +37,7 @@
             <ul>
                 <!-- Theme Switcher (In Menu) -->
                 <li style="display: flex; align-items: center; justify-content: space-between; padding: 0 16px;">
-                    <span style="font-weight: 500;">Mode Gelap</span>
+                    <span style="font-weight: 500; color: white;">Mode Gelap</span>
                     <label class="theme-switch" title="Ganti Tema" style="margin: 0; z-index: 10; cursor: pointer; pointer-events: auto; touch-action: manipulation;">
                         <input type="checkbox" id="checkbox" onchange="toggleTheme()">
                         <div class="slider">
