@@ -8,12 +8,12 @@
 @endif
 
 <div id="adminChatWidget" style="position: fixed; bottom: 90px; right: 20px; z-index: 999999; display: none; opacity: 0; transform: translateY(20px); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);">
-    <div style="width: 380px; height: 600px; background: #ffffff; border-radius: 18px; box-shadow: 0 5px 40px rgba(0,0,0,0.16); display: flex; flex-direction: column; overflow: hidden; border: 1px solid rgba(0,0,0,0.08);">
+    <div style="width: 380px; height: 500px; max-height: 70vh; background: #ffffff; border-radius: 18px; box-shadow: 0 5px 40px rgba(0,0,0,0.16); display: flex; flex-direction: column; overflow: hidden; border: 1px solid rgba(0,0,0,0.08);">
         
         <!-- View: Session List -->
         <div id="aw-view-sessions" style="display: flex; flex-direction: column; height: 100%;">
             <!-- Header -->
-            <div style="padding: 16px; background: #1f2937; color: white; flex-shrink: 0;">
+            <div style="padding: 16px; background: linear-gradient(135deg, #4f46e5, #9333ea); color: white; flex-shrink: 0;">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <h3 style="margin: 0; font-size: 1.1rem; font-weight: 700;">Customer Chats</h3>
                     <button id="aw-close-btn" style="background: rgba(255,255,255,0.2); border: none; color: white; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center;">✕</button>
@@ -43,14 +43,14 @@
             </div>
             
             <!-- Messages Area -->
-            <div id="aw-chat-scroller" style="flex: 1; overflow-y: auto; padding: 16px; background-color: #efeae2; background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png'); background-repeat: repeat; background-size: 400px;">
+            <div id="aw-chat-scroller" style="flex: 1; overflow-y: auto; padding: 16px; background-color: #f8fafc;">
                 <!-- Msgs injected here -->
             </div>
 
             <!-- Input Area -->
             <div style="padding: 10px; background: #f0f2f5; display: flex; align-items: center; gap: 8px;">
                 <input type="text" id="aw-msg-input" placeholder="Ketik pesan..." style="flex: 1; padding: 10px 16px; border-radius: 20px; border: 1px solid transparent; outline: none; font-size: 0.95rem; color: #000000; background: #ffffff;">
-                <button id="aw-send-btn" style="width: 40px; height: 40px; border-radius: 50%; border: none; background: #f43f5e; color: white; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                <button id="aw-send-btn" style="width: 40px; height: 40px; border-radius: 50%; border: none; background: linear-gradient(135deg, #4f46e5, #9333ea); color: white; display: flex; align-items: center; justify-content: center; cursor: pointer;">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
                 </button>
             </div>
@@ -60,7 +60,7 @@
 
 <!-- Floating Button -->
 <button id="adminChatBtn" 
-    style="position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; border-radius: 50%; background: #f43f5e; color: white; border: none; box-shadow: 0 4px 20px rgba(244, 63, 94, 0.4); z-index: 999990; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: transform 0.2s;">
+    style="position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #4f46e5, #9333ea); color: white; border: none; box-shadow: 0 4px 20px rgba(79, 70, 229, 0.4); z-index: 999990; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: transform 0.2s;">
     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
     <span id="aw-badge" style="position: absolute; top: 0; right: 0; background: #ef4444; width: 22px; height: 22px; border-radius: 50%; font-size: 0.75rem; display: none; align-items: center; justify-content: center; font-weight: 700; border: 2px solid var(--dark);">0</span>
 </button>
@@ -93,7 +93,15 @@
     if(document.getElementById('aw-close-btn')) document.getElementById('aw-close-btn').onclick = toggleWidget;
     if(document.getElementById('aw-back-btn')) document.getElementById('aw-back-btn').onclick = () => switchView('sessions');
     if(document.getElementById('aw-send-btn')) document.getElementById('aw-send-btn').onclick = sendMessage;
+    if(document.getElementById('aw-send-btn')) document.getElementById('aw-send-btn').onclick = sendMessage;
     if(els.input) els.input.onkeypress = (e) => { if(e.key === 'Enter') sendMessage(); };
+
+    // Click Outside to Close Logic
+    document.addEventListener('click', function(e) {
+        if (state.isOpen && !els.widget.contains(e.target) && !els.btn.contains(e.target)) {
+            toggleWidget();
+        }
+    });
 
     function toggleWidget() {
         state.isOpen = !state.isOpen;
