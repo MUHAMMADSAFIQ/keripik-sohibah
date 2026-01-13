@@ -262,7 +262,8 @@ nav ul {
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important;
         position: fixed !important;
         /* Stick to top */
-        z-index: 9999 !important;
+        z-index: 10005 !important;
+        /* Higher than Overlay (10000) */
     }
 
     /* Fix logo size on mobile */
@@ -293,7 +294,7 @@ nav ul {
         height: 100vh;
         background: rgba(15, 23, 42, 0.98);
         backdrop-filter: blur(20px);
-        z-index: 10001;
+        z-index: 10006;
         flex-direction: column;
         justify-content: flex-start;
         align-items: stretch;
