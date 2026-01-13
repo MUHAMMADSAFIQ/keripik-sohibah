@@ -2,15 +2,21 @@
 
 @section('content')
 <style>
-    /* DESAIN ANTI-SENSOR DARK READER - REGISTER PAGE */
-    /* Mengadopsi style Login Page: Dark Glass + No Labels + White Inputs */
+    /* DESAIN ADAPTIF TEAM-AWARE - REGISTER PAGE */
     
     .auth-card {
-        background: rgba(15, 23, 42, 0.95) !important; /* Dark Glass Solid */
+        background: rgba(255, 255, 255, 0.9) !important; /* Light Default */
         backdrop-filter: blur(15px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        color: #f8fafc !important;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        color: #1e293b !important; /* Dark Text */
         padding: 3rem 2.5rem !important;
+        transition: all 0.3s ease;
+    }
+
+    body.dark-mode .auth-card {
+        background: rgba(15, 23, 42, 0.95) !important; /* Dark Mode */
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: #f8fafc !important; /* Light Text */
     }
 
     .auth-card h2 {
@@ -20,33 +26,31 @@
         margin-bottom: 0.5rem !important;
     }
 
-    /* Input: PUTIH BERSIH + Teks HITAM */
+    /* Input Styling - Adaptive */
     .auth-card input:not([type="checkbox"]) {
         color-scheme: light !important; 
         background: #ffffff !important; 
         color: #1e293b !important; 
-        border: 2px solid transparent !important;
+        border: 2px solid #e2e8f0 !important;
         padding: 1rem 1.25rem !important; 
         font-size: 1rem !important;
         font-weight: 500 !important;
-        border-radius: 50px !important; /* Rounded Pill Shape */
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1) !important;
+        border-radius: 50px !important; 
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05) !important;
         width: 100%;
-        margin-bottom: 0.5rem; /* Spasi antar input */
+        margin-bottom: 0.5rem; 
+    }
+
+    /* Dark Mode Input Override */
+    body.dark-mode .auth-card input:not([type="checkbox"]) {
+        border-color: transparent !important;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.2) !important;
     }
     
     .auth-card input:not([type="checkbox"]):focus {
         border-color: #4ade80 !important;
         box-shadow: 0 0 0 4px rgba(74, 222, 128, 0.2) !important;
         outline: none !important;
-    }
-
-    /* Autofill Fix Absolute */
-    .auth-card input:-webkit-autofill {
-        -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
-        -webkit-text-fill-color: #1e293b !important;
-        background-color: #ffffff !important;
-        caret-color: #1e293b !important;
     }
 
     /* Placeholder style */
@@ -69,6 +73,7 @@
         cursor: pointer !important;
         margin-top: 1.5rem !important;
         box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4) !important;
+        transition: transform 0.2s;
     }
     
     .form-row {
@@ -98,7 +103,7 @@
         
         <div style="text-align: center; margin-bottom: 2rem;">
             <h2 style="font-size: 2.2rem; font-weight: 800;">Buat Akun Baru</h2>
-            <p style="color: #cbd5e1; font-size: 1rem;">Bergabunglah dengan Keripik Sohibah sekarang!</p>
+            <p style="color: var(--text-muted); font-size: 1rem;">Bergabunglah dengan Keripik Sohibah sekarang!</p>
         </div>
 
         <form action="{{ route('register.perform') }}" method="POST" autocomplete="off">

@@ -2,16 +2,21 @@
 
 @section('content')
 <style>
-    /* DESAIN ANTI-SENSOR DARK READER */
-    /* Kita menghapus Label eksternal dan menggunakan Placeholder di dalam input */
-    /* Input tetap PUTIH agar bersih dari autofill artifact hitam */
+    /* DESAIN ADAPTIF (Light/Dark Mode) */
     
     .auth-card {
-        background: rgba(15, 23, 42, 0.95) !important; /* Dark Glass Solid */
+        background: rgba(255, 255, 255, 0.9) !important; /* Light Glass Default */
         backdrop-filter: blur(15px);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        color: #1e293b !important; /* Dark Text */
+        padding: 3rem 2rem !important;
+        transition: all 0.3s ease;
+    }
+
+    body.dark-mode .auth-card {
+        background: rgba(15, 23, 42, 0.95) !important; /* Dark Glass */
         border: 1px solid rgba(255, 255, 255, 0.1);
-        color: #f8fafc !important;
-        padding: 3rem 2rem !important; /* Spasi lebih luas */
+        color: #f8fafc !important; /* White Text */
     }
 
     .auth-card h2 {
@@ -21,17 +26,23 @@
         margin-bottom: 0.5rem !important;
     }
 
-    /* Input: PUTIH BERSIH + Teks HITAM */
+    /* Input Styling - Adaptive */
     .auth-card input:not([type="checkbox"]) {
         color-scheme: light !important; 
         background: #ffffff !important; 
         color: #1e293b !important; 
-        border: 2px solid transparent !important;
-        padding: 1rem 1.25rem !important; /* Padding besar enak dilihat */
+        border: 2px solid #e2e8f0 !important; /* Visible Border in Light Mode */
+        padding: 1rem 1.25rem !important;
         font-size: 1rem !important;
         font-weight: 500 !important;
-        border-radius: 50px !important; /* Rounded Pill Shape - Modern */
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1) !important;
+        border-radius: 50px !important;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05) !important;
+    }
+
+    /* Dark Mode Input Override */
+    body.dark-mode .auth-card input:not([type="checkbox"]) {
+        border-color: transparent !important;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.2) !important;
     }
     
     .auth-card input:not([type="checkbox"]):focus {
@@ -40,36 +51,38 @@
         outline: none !important;
     }
 
-    /* Autofill Fix Absolute */
-    .auth-card input:-webkit-autofill {
-        -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
-        -webkit-text-fill-color: #1e293b !important;
-        background-color: #ffffff !important;
-        caret-color: #1e293b !important;
-    }
-
     /* Placeholder style */
     .auth-card input::placeholder {
         color: #94a3b8 !important;
         font-weight: 400 !important;
-        opacity: 1 !important; /* Firefox fix */
+        opacity: 1 !important;
     }
 
     /* Checkbox & Links */
     .remember-me label {
-        color: #cbd5e1 !important;
+        color: #64748b !important; /* Darker in Light Mode */
         font-size: 0.9rem !important;
+        font-weight: 500;
     }
+
+    body.dark-mode .remember-me label {
+        color: #cbd5e1 !important; /* Lighter in Dark Mode */
+    }
+
     .forgot-pass {
-        color: #4ade80 !important;
+        color: #3b82f6 !important;
         font-weight: 600 !important;
+    }
+
+    body.dark-mode .forgot-pass {
+        color: #4ade80 !important;
     }
     
     /* Tombol Login */
     .btn-login {
         width: 100%;
         padding: 1rem;
-        border-radius: 50px !important; /* Pill shape */
+        border-radius: 50px !important;
         font-weight: 700 !important;
         font-size: 1.1rem !important;
         background: linear-gradient(135deg, #4ade80, #3b82f6) !important;
@@ -78,10 +91,11 @@
         cursor: pointer !important;
         margin-top: 1rem !important;
         box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4) !important;
+        transition: transform 0.2s;
     }
     
     .or-divider span {
-        background: #0f172a !important; 
+        background: transparent !important; 
         color: #94a3b8 !important;
     }
 </style>
@@ -91,7 +105,7 @@
         
         <div style="text-align: center; margin-bottom: 2.5rem;">
             <h2 style="font-size: 2.2rem; font-weight: 800;">Selamat Datang!</h2>
-            <p style="color: #cbd5e1; font-size: 1rem;">Masuk ke akun Keripik Sohibah Anda</p>
+            <p style="color: var(--text-muted); font-size: 1rem;">Masuk ke akun Keripik Sohibah Anda</p>
         </div>
 
         <form action="{{ route('login.perform') }}" method="POST" autocomplete="off">
