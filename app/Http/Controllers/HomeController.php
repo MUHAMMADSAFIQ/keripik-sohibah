@@ -70,6 +70,9 @@ class HomeController extends Controller
             // Check Admin Online Status
             $adminOnline = Cache::get('admin_online', false);
             
+            // Check if this is indeed the first message (or restart)
+            $isFirstMessage = ChatMessage::where('session_id', $sessionId)->doesntExist();
+
             // Save User Message
             $userMessage = ChatMessage::create([
                 'session_id' => $sessionId,
@@ -80,6 +83,18 @@ class HomeController extends Controller
                 'user_name' => $userName,
                 'user_phone' => $userPhone
             ]);
+            
+            // Auto-reply for first message
+            if ($isFirstMessage) {
+                ChatMessage::create([
+                    'session_id' => $sessionId,
+                    'sender_type' => 'ai',
+                    'message' => 'Halo! Terima kasih sudah menghubungi Keripik Sohibah. Admin kami akan segera membalas pesan Kakak secepatnya. Mohon ditunggu ya! 😊',
+                    'is_read' => true,
+                    'user_name' => $userName,
+                    'user_phone' => $userPhone
+                ]);
+            }
             
             // NOTE: AI Auto-reply is DISABLED to support direct Admin-User chat flow.
             // The message is saved, and the user must wait for an Admin reply.
