@@ -399,7 +399,47 @@ nav ul {
 /* Mobile & Tablet Refinements */
 @media (max-width: 768px) {
     .container {
-        padding: 0 16px;
+        padding: 0 12px;
+        /* Reduce container padding */
+    }
+
+    /* FORCE 2 COLUMNS ON MOBILE */
+    .grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+    }
+
+    /* Compact Product Card for 2-Col Layout */
+    .product-item.card {
+        padding: 12px !important;
+        border-radius: 16px !important;
+    }
+
+    .product-item.card h3 {
+        font-size: 0.9rem !important;
+        margin-bottom: 4px !important;
+        line-height: 1.3 !important;
+        height: 2.6em;
+        /* Limit to 2 lines visual height */
+        overflow: hidden;
+    }
+
+    .product-item.card p {
+        display: none;
+        /* Hide description on mobile to save space */
+    }
+
+    .product-item.card .price {
+        font-size: 1rem !important;
+        margin: 8px 0;
+    }
+
+    /* Adjust Button Size mobile */
+    .product-item.card .btn {
+        padding: 8px 0 !important;
+        /* Full width button */
+        font-size: 0.85rem !important;
+        width: 100%;
     }
 
     section {
@@ -574,10 +614,10 @@ nav ul {
 
 
 /* Very Small Screens (iPhone SE, Fold) */
-@media (max-width: 380px) {
+@media (max-width: 320px) {
     .grid {
-        grid-template-columns: 1fr;
-        /* Stack on tiny screens */
+        grid-template-columns: 1fr !important;
+        /* Stack on VERY tiny screens only */
     }
 
     h1 {

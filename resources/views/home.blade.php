@@ -97,7 +97,7 @@
     
     @if($products->count() > 4)
         <div style="text-align: center; margin-top: 3rem;">
-            <button id="loadMoreBtn" onclick="toggleProducts()" class="btn" style="background: transparent; border: 1px solid rgba(255,255,255,0.2); color: white;">
+            <button id="loadMoreBtn" onclick="toggleProducts()" class="btn" style="background: transparent; border: 1px solid var(--primary); color: var(--text-main);">
                 Lihat Menu Lainnya ⬇
             </button>
         </div>
