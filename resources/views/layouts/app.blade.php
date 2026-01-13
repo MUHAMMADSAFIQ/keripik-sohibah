@@ -648,7 +648,7 @@
                 const messages = await response.json();
                 
                 messages.forEach(msg => {
-                    if (msg.sender_type === 'admin') {
+                    if (msg.sender_type === 'admin' || msg.sender_type === 'ai') {
                         addAdminMessageToUI(msg);
                         lastMessageId = Math.max(lastMessageId, msg.id);
                     }
@@ -678,7 +678,7 @@
             // Premium Gradient Style (Matching Admin Dashboard)
             adminDiv.innerHTML = `
                 <div style="max-width: 80%; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 12px 12px 12px 0; padding: 12px 16px; box-shadow: 0 4px 15px rgba(139, 92, 246, 0.2); position: relative; display: flex; flex-direction: column; color: white; border: 1px solid rgba(255,255,255,0.1);">
-                    <div style="font-size: 0.8rem; font-weight: 700; color: rgba(255,255,255,0.9); margin-bottom: 4px;">Admin Sohibah</div>
+                    <div style="font-size: 0.8rem; font-weight: 700; color: rgba(255,255,255,0.9); margin-bottom: 4px;">${message.sender_type === 'ai' ? 'Sistem Otomatis' : 'Admin Sohibah'}</div>
                     <div style="font-size: 0.95rem; line-height: 1.5;">${message.message}</div>
                     <div style="align-self: flex-end; font-size: 0.7rem; color: rgba(255,255,255,0.7); margin-top: 4px;">
                         ${time}

@@ -304,13 +304,21 @@ nav ul {
         border-right: 1px solid rgba(255, 255, 255, 0.1);
         box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5);
         /* Shadow to right */
-        opacity: 1;
-        visibility: visible;
+        opacity: 0;
+        /* Fully hide */
+        visibility: hidden;
+        /* Hide from DOM interactions effectively */
+        pointer-events: none;
+        /* CRITICAL: Prevent blocking clicks */
         margin: 0;
     }
 
     .nav-container.active {
         transform: translateX(0);
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        /* Re-enable clicks */
     }
 }
 
