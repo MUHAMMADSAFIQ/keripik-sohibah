@@ -359,8 +359,18 @@
         }
 
         function closeMenu() {
-            document.getElementById('navMenu').classList.remove('active');
-            document.querySelector('.mobile-menu-btn').classList.remove('open');
+            const nav = document.getElementById('navMenu');
+            const btn = document.querySelector('.mobile-menu-btn');
+            
+            if(nav) nav.classList.remove('active');
+            if(btn) btn.classList.remove('open');
+            
+            // CRITICAL FIX: Hide overlay explicitly
+            const overlay = document.getElementById('overlay');
+            if(overlay) {
+                overlay.style.opacity = '0';
+                overlay.style.pointerEvents = 'none';
+            }
         }
 
         // Close menu when clicking outside - FIXED to prevent conflicts
