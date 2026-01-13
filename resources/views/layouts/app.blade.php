@@ -100,7 +100,7 @@
         </div>
     </nav>
     
-    <div class="overlay" id="overlay" onclick="closeMenu()"></div>
+    <div class="overlay" id="overlay" onclick="closeMenu()" style="position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 10000; opacity: 0; pointer-events: none; transition: opacity 0.3s;"></div>
 
     <main>
         @if(session('success'))
