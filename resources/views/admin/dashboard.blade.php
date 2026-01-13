@@ -249,15 +249,28 @@
     <!-- Main Content Area -->
     <main class="admin-main">
         
-        <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+        <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 10px;">
             <div>
                 <h1 style="font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem; letter-spacing: -0.02em;">Dashboard</h1>
                 <p style="color: var(--text-muted); font-size: 0.95rem; font-weight: 500;">Overview performa toko hari ini</p>
             </div>
-            <div style="text-align: right; display: none; @media(min-width: 768px){display:block;}">
-                <span style="background: rgba(59, 130, 246, 0.1); color: #3b82f6; padding: 5px 10px; border-radius: 8px; font-size: 0.9rem;">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <span style="background: rgba(59, 130, 246, 0.1); color: #3b82f6; padding: 5px 10px; border-radius: 8px; font-size: 0.9rem; font-weight: 600;">
                     {{ now()->format('d M Y') }}
                 </span>
+                
+                <!-- Theme Switcher -->
+                <div class="theme-switch-wrapper">
+                    <label class="theme-switch" for="adminCheckbox" style="display: inline-block; height: 26px; position: relative; width: 50px; cursor: pointer;">
+                        <input type="checkbox" id="adminCheckbox" onchange="toggleAdminTheme()" style="display:none;">
+                        <div class="slider" style="background-color: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); bottom: 0; left: 0; position: absolute; right: 0; top: 0; transition: .4s; border-radius: 34px;">
+                            <div class="knob" style="bottom: 2px; left: 3px; position: absolute; width: 20px; height: 20px; border-radius: 50%; background: white; transition: 0.4s; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
+                                <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1e293b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                                <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                            </div>
+                        </div>
+                    </label>
+                </div>
             </div>
         </header>
 
@@ -691,6 +704,47 @@
             document.getElementById('closeSidebarBtn').style.display = 'block';
         }
     });
+    
+    // Admin Theme Logic
+    function toggleAdminTheme() {
+        const body = document.body;
+        const checkbox = document.getElementById('adminCheckbox');
+        const sun = document.querySelector('.sun');
+        const moon = document.querySelector('.moon');
+        const knob = document.querySelector('.knob');
+        
+        body.classList.toggle('dark-mode');
+        const isDark = body.classList.contains('dark-mode');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        
+        // Update UI
+        if(isDark) {
+            if(knob) knob.style.transform = 'translateX(24px)';
+            if(moon) moon.style.display = 'none';
+            if(sun) sun.style.display = 'block';
+        } else {
+            if(knob) knob.style.transform = 'translateX(0)';
+            if(moon) moon.style.display = 'block';
+            if(sun) sun.style.display = 'none';
+        }
+    }
+
+    // Initialize Admin Theme
+    (function initAdminTheme() {
+        const savedTheme = localStorage.getItem('theme');
+        const checkbox = document.getElementById('adminCheckbox');
+        const sun = document.querySelector('.sun');
+        const moon = document.querySelector('.moon');
+        const knob = document.querySelector('.knob');
+        
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            if(checkbox) checkbox.checked = true;
+            if(knob) knob.style.transform = 'translateX(24px)';
+            if(moon) moon.style.display = 'none';
+            if(sun) sun.style.display = 'block';
+        }
+    })();
     
     // Admin Chat Widget Polling
     let adminChatPolling;

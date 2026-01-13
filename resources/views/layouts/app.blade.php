@@ -17,7 +17,7 @@
     <nav class="glass-panel">
         <a href="{{ route('home') }}" class="logo">Keripik Sohibah</a>
         
-        <div class="mobile-menu-btn" onclick="toggleMenu()">
+        <div class="mobile-menu-btn" onclick="toggleMenu(event)">
             <span class="bar"></span>
             <span class="bar"></span>
             <span class="bar"></span>
@@ -169,14 +169,14 @@
     <!-- Chat System -->
     @include('admin.chat_widget')
     <!-- Enhanced Chat Widget (User) -->
-    <div class="chat-toggle" onclick="toggleChat()" style="position: relative;">
+    <div class="chat-toggle" onclick="toggleChat(event)" style="position: relative;">
         <span style="font-size: 1.5rem;">💬</span>
         <span id="chatBadge" style="position: absolute; top: -5px; right: -5px; background: #ef4444; color: white; border-radius: 50%; width: 20px; height: 20px; font-size: 0.7rem; display: none; align-items: center; justify-content: center; font-weight: 700; animation: pulse 2s infinite;">1</span>
     </div>
     
     <div class="chat-widget" id="chatWidget" style="background: #efeae2; display: flex; flex-direction: column;">
         <!-- Chat Header -->
-        <div class="chat-header" style="background: #008069; color: white; padding: 1rem 1.5rem; border-radius: 20px 20px 0 0; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 3px rgba(0,0,0,0.1); flex-shrink: 0; z-index: 10;">
+        <div class="chat-header" style="background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 1rem 1.5rem; border-radius: 20px 20px 0 0; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3); flex-shrink: 0; z-index: 10;">
             <div style="display: flex; align-items: center; gap: 12px;">
                 <div style="width: 40px; height: 40px; border-radius: 50%; background: white; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; overflow: hidden;">
                     <img src="https://ui-avatars.com/api/?name=Admin+Sohibah&background=25D366&color=fff" alt="Admin" style="width: 100%; height: 100%;">
@@ -192,7 +192,7 @@
         </div>
         
         <!-- Chat Body with WhatsApp-like Background -->
-        <div class="chat-body" id="chatBody" style="flex: 1; padding: 20px; overflow-y: auto; background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png'); background-repeat: repeat; background-size: 400px;">
+        <div class="chat-body" id="chatBody" style="flex: 1; padding: 20px; overflow-y: auto; background: rgba(248, 250, 252, 0.95);">
             <!-- Welcome Message -->
             <div class="message bot">
                 <div style="display: flex; max-width: 80%; background: white; border-radius: 0 12px 12px 12px; padding: 8px 10px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); position: relative; margin-bottom: 2px;">
@@ -335,9 +335,27 @@
     
     <script>
         // Mobile Menu Logic
-        function toggleMenu() {
-            document.getElementById('navMenu').classList.toggle('active');
-            document.querySelector('.mobile-menu-btn').classList.toggle('open');
+        function toggleMenu(event) {
+            if (event) {
+                event.stopPropagation();
+            }
+            const nav = document.getElementById('navMenu');
+            const btn = document.querySelector('.mobile-menu-btn');
+            
+            nav.classList.toggle('active');
+            btn.classList.toggle('open');
+            
+            // Toggle overlay
+            const overlay = document.getElementById('overlay');
+            if(overlay) {
+                if (nav.classList.contains('active')) {
+                    overlay.style.opacity = '1';
+                    overlay.style.pointerEvents = 'auto';
+                } else {
+                    overlay.style.opacity = '0';
+                    overlay.style.pointerEvents = 'none';
+                }
+            }
         }
 
         function closeMenu() {
@@ -369,7 +387,8 @@
             }
         }, { passive: true }); // Add passive option for better performance
 
-        function toggleChat() {
+        function toggleChat(event) {
+            if(event) event.stopPropagation();
             const widget = document.getElementById('chatWidget');
             const badge = document.getElementById('chatBadge');
             widget.classList.toggle('open');
@@ -656,12 +675,12 @@
             
             const time = new Date(message.created_at).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
             
-            // WhatsApp Style: White bubble on left with tail
+            // Premium Gradient Style (Matching Admin Dashboard)
             adminDiv.innerHTML = `
-                <div style="max-width: 80%; background: white; border-radius: 0 12px 12px 12px; padding: 6px 7px 8px 9px; box-shadow: 0 1px 0.5px rgba(0,0,0,0.13); position: relative; display: flex; flex-direction: column; min-width: 100px;">
-                    <div style="font-size: 0.8rem; font-weight: 700; color: #d64828; margin-bottom: 2px; font-family: 'Segoe UI', Helvetica, Arial, sans-serif;">Admin Sohibah</div>
-                    <div style="font-size: 0.95rem; line-height: 19px; color: #111b21; font-family: 'Segoe UI', Helvetica, Arial, sans-serif;">${message.message}</div>
-                    <div style="align-self: flex-end; font-size: 0.68rem; color: #667781; margin-top: 2px; height: 15px;">
+                <div style="max-width: 80%; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 12px 12px 12px 0; padding: 12px 16px; box-shadow: 0 4px 15px rgba(139, 92, 246, 0.2); position: relative; display: flex; flex-direction: column; color: white; border: 1px solid rgba(255,255,255,0.1);">
+                    <div style="font-size: 0.8rem; font-weight: 700; color: rgba(255,255,255,0.9); margin-bottom: 4px;">Admin Sohibah</div>
+                    <div style="font-size: 0.95rem; line-height: 1.5;">${message.message}</div>
+                    <div style="align-self: flex-end; font-size: 0.7rem; color: rgba(255,255,255,0.7); margin-top: 4px;">
                         ${time}
                     </div>
                 </div>
