@@ -33,11 +33,11 @@ class ChatMessage extends Model
         }
 
         if ($this->is_read) {
-            return 'read'; // Centang biru (sudah dibaca admin)
+            return 'read'; 
         } elseif ($this->admin_online) {
-            return 'delivered'; // Centang 2 (admin online, terkirim)
+            return 'delivered'; 
         } else {
-            return 'sent'; // Centang 1 (admin offline, terkirim)
+            return 'sent'; 
         }
     }
 

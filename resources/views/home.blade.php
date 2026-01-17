@@ -401,7 +401,7 @@
                 </h4>
                 <div style="display: flex; gap: 1rem; align-items: center; justify-content: center; flex-wrap: wrap; margin-bottom: 1rem;">
                     <!-- Instagram -->
-                    <a href="https://instagram.com/sohibah" target="_blank" 
+                    <a href="https://instagram.com/_mhmdsfq" target="_blank" 
                        style="width: 54px; height: 54px; background: linear-gradient(135deg, #f09433, #bc1888); border-radius: 13px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(240, 148, 51, 0.3);" 
                        onmouseover="this.style.transform='translateY(-4px) scale(1.08)'; this.style.boxShadow='0 8px 20px rgba(240, 148, 51, 0.5)';" 
                        onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 4px 12px rgba(240, 148, 51, 0.3)';">

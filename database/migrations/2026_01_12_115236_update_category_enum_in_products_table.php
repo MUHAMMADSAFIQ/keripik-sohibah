@@ -12,7 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         // Use raw SQL to update ENUM. Note: This assumes MySQL.
-        \Illuminate\Support\Facades\DB::statement("ALTER TABLE products MODIFY COLUMN category ENUM('keripik', 'pulsa', 'gas_galon', 'other', 'minuman') NOT NULL DEFAULT 'keripik'");
+        if (\Illuminate\Support\Facades\DB::connection()->getDriverName() === 'mysql') {
+            \Illuminate\Support\Facades\DB::statement("ALTER TABLE products MODIFY COLUMN category ENUM('keripik', 'pulsa', 'gas_galon', 'other', 'minuman') NOT NULL DEFAULT 'keripik'");
+        }
     }
 
     /**
@@ -20,6 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-         \Illuminate\Support\Facades\DB::statement("ALTER TABLE products MODIFY COLUMN category ENUM('keripik', 'pulsa', 'gas_galon', 'other') NOT NULL DEFAULT 'keripik'");
+         if (\Illuminate\Support\Facades\DB::connection()->getDriverName() === 'mysql') {
+            \Illuminate\Support\Facades\DB::statement("ALTER TABLE products MODIFY COLUMN category ENUM('keripik', 'pulsa', 'gas_galon', 'other') NOT NULL DEFAULT 'keripik'");
+         }
     }
 };

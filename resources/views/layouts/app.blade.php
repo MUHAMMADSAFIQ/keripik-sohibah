@@ -133,7 +133,7 @@
         <p>&copy; 2025 Keripik Sohibah. All rights reserved.</p>
         <div style="margin-top: 15px; display: flex; justify-content: center; gap: 20px; align-items: center;">
              <!-- Instagram -->
-            <a href="https://instagram.com/sohibah" target="_blank" style="transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+            <a href="https://instagram.com/_mhmdsfq" target="_blank" style="transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="stroke: url(#ig-grad-footer); fill: none;">
                     <defs>
                         <linearGradient id="ig-grad-footer" x1="0%" y1="0%" x2="100%" y2="100%">
